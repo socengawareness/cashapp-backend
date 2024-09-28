@@ -1,0 +1,23 @@
+
+# Ignore .env file with sensitive environment variables
+.env
+
+# Ignore Python cache and compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Flake8 configuration files
+.flake8
+
+# Ignore VSCode settings and other IDE-specific folders
+.vscode/
+.idea/
+
+# Ignore pipenv and python lock files
+Pipfile.lock
+*.lock
+
+# Ignore log files
+*.log

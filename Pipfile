@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fastapi = "*"
+uvicorn = "*"
+motor = "*"
+pyjwt = "*"
+python-dotenv = "*"
+fastapi-cors = "*"
+python-jose = "*"
+python-multipart = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
