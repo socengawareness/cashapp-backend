@@ -14,7 +14,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "*"
+        "https://cashapp-api.socengawareness.org"
     ],  # Allow all origins, but you can restrict this to specific domains
     allow_credentials=True,
     allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
