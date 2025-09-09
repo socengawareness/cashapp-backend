@@ -21,7 +21,7 @@ async def get_user_by_login_number(login_number: str):
     user = await users_collection.find_one(
         {"login_number": login_number}, {"_id": 0, "assigned_date": 0}
     )
-    print(user)
+    # print(user)
     return user
 
 

@@ -49,12 +49,12 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
 @app.post("/login")
 async def login(user: Login):
     # Check if the user exists by login number
-    print(user)
+    # print(user)
     db_user = await get_user_by_login_number(user.login_number)
 
     if db_user:
         # Check if the device_id exists in the database
-        print(db_user)
+        # print(db_user)
         if "device_id" in db_user:
             # If device_id exists, check if it matches the provided device_id
             if db_user["device_id"] != user.device_id:
@@ -92,22 +92,32 @@ async def get_user(current_user: dict = Depends(get_current_user)):
     subscription_end_date = current_user.get("subscription_end_date")
 
     if subscription_start_date and subscription_end_date:
-        # Convert subscription dates to datetime objects
-        # subscription_start_date = datetime.strptime(subscription_start_date, "%Y-%m-%d")
-        # subscription_end_date = datetime.strptime(subscription_end_date, "%Y-%m-%d")
-        current_date = datetime.utcnow()
+        # Convert to just the date (no time)
+        start_day = subscription_start_date.date()
+        end_day = subscription_end_date.date()
+        current_day = (
+            datetime.utcnow().date()
+        )  # or datetime.now().date() if you prefer local time
 
-        # Check if the subscription is active or expired
-        if subscription_start_date <= current_date <= subscription_end_date:
+        print(f"Subscription start day: {start_day}")
+        print(f"Current day: {current_day}")
+
+        if start_day <= current_day <= end_day:
             subscription = True
             subscription_message = "active"
-        elif current_date > subscription_end_date:
+            print("Subscription is active")
+        elif current_day > end_day:
             subscription = False
             subscription_message = "expired"
+            print("Subscription has expired")
+        else:
+            subscription = False
+            subscription_message = "not started"
+            print("Subscription has not started yet")
     else:
-        # No subscription found
         subscription = False
         subscription_message = "not subscribed"
+        print("No subscription found")
 
     # Return user data along with subscription status
     return {
